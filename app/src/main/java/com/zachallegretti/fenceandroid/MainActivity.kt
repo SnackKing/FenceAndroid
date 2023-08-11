@@ -1,9 +1,13 @@
 package com.zachallegretti.fenceandroid
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MotionEvent.ACTION_DOWN
+import android.view.MotionEvent.ACTION_UP
 import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity(), BoutView {
 
@@ -18,6 +22,12 @@ class MainActivity : AppCompatActivity(), BoutView {
     private lateinit var rightScoreView: TextView
 
     private lateinit var boutTypeView: TextView
+
+    private lateinit var timer: TextView
+
+    private lateinit var startFrame: FrameLayout
+    private lateinit var startView: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -32,6 +42,11 @@ class MainActivity : AppCompatActivity(), BoutView {
         rightScoreView = findViewById(R.id.right_score)
 
         boutTypeView = findViewById(R.id.mode_indicator)
+
+        timer = findViewById(R.id.timer)
+
+        startFrame = findViewById(R.id.start_frame)
+        startView = findViewById(R.id.start)
 
         setClickListeners()
 
@@ -53,6 +68,16 @@ class MainActivity : AppCompatActivity(), BoutView {
         rightScoreDecreaseButton.setOnClickListener {
             presenter.decreaseRightScore()
         }
+
+        startFrame.setOnTouchListener { view, motionEvent ->
+            if (motionEvent.action == ACTION_DOWN) {
+                presenter.startTimer()
+
+            } else if (motionEvent.action == ACTION_UP) {
+                presenter.stopTimer()
+            }
+            true
+        }
     }
 
     override fun updateLeftScore(newScore: Int) {
@@ -66,4 +91,22 @@ class MainActivity : AppCompatActivity(), BoutView {
     override fun updateBoutType(boutType: Bout.BoutType) {
         boutTypeView.text = boutType.name
     }
+
+    override fun updateStartStopText(started: Boolean) {
+        if (started) {
+            startView.text = applicationContext.resources.getString(R.string.start)
+        } else {
+            startView.text = applicationContext.resources.getString(R.string.stop)
+        }
+    }
+
+    override fun updateTimerText(millisRemaining: Long) {
+        timer.text = convertMillisToString(millisRemaining)
+    }
+
+    private fun convertMillisToString(millis: Long) = String.format(
+            "%02d:%02d",
+            TimeUnit.MILLISECONDS.toMinutes(millis),
+            TimeUnit.MILLISECONDS.toSeconds(millis) % TimeUnit.MINUTES.toSeconds(1)
+        )
 }

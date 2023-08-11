@@ -2,4 +2,6 @@
     <string name="app_name">My Application</string>
     <string name="zero">0</string>
     <string name="double_touch">Double Touch</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
 </resources>

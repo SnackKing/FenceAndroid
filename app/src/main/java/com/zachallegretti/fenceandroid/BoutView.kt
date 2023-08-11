@@ -7,4 +7,8 @@ interface BoutView {
     fun updateRightScore(newScore: Int)
 
     fun updateBoutType(boutType: Bout.BoutType)
+
+    fun updateTimerText(millisRemaining: Long)
+
+    fun updateStartStopText(start: Boolean)
 }
