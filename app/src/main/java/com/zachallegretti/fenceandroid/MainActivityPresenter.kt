@@ -56,6 +56,11 @@ class MainActivityPresenter constructor(val view: BoutView) {
         }
     }
 
+    fun doubleTouch() {
+        increaseLeftScore()
+        increaseRightScore()
+    }
+
     fun decreaseRightScore() {
         if (bout.rightScore > 0) {
             bout.rightScore--

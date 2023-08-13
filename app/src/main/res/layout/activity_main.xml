@@ -60,6 +60,7 @@
             android:layout_below="@id/mode_indicator"
             android:layout_centerHorizontal="true"
             android:text="@string/double_touch"
+            android:padding="16dp"
             android:textSize="18sp" />
 
         <Button

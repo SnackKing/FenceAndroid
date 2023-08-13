@@ -21,6 +21,8 @@ class MainActivity : AppCompatActivity(), BoutView {
     private lateinit var rightScoreDecreaseButton: Button
     private lateinit var rightScoreView: TextView
 
+    private lateinit var doubleTouchView: TextView
+
     private lateinit var boutTypeView: TextView
 
     private lateinit var timer: TextView
@@ -40,6 +42,8 @@ class MainActivity : AppCompatActivity(), BoutView {
         rightScoreIncreaseButton = findViewById(R.id.right_increase_button)
         rightScoreDecreaseButton = findViewById(R.id.right_decrease_button)
         rightScoreView = findViewById(R.id.right_score)
+
+        doubleTouchView = findViewById(R.id.double_touch)
 
         boutTypeView = findViewById(R.id.mode_indicator)
 
@@ -67,6 +71,10 @@ class MainActivity : AppCompatActivity(), BoutView {
 
         rightScoreDecreaseButton.setOnClickListener {
             presenter.decreaseRightScore()
+        }
+
+        doubleTouchView.setOnClickListener {
+            presenter.doubleTouch()
         }
 
         startFrame.setOnTouchListener { view, motionEvent ->
