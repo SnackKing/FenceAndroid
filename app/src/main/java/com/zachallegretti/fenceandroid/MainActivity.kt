@@ -30,6 +30,8 @@ class MainActivity : AppCompatActivity(), BoutView {
     private lateinit var startFrame: FrameLayout
     private lateinit var startView: TextView
 
+    private lateinit var settingsView: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -51,6 +53,8 @@ class MainActivity : AppCompatActivity(), BoutView {
 
         startFrame = findViewById(R.id.start_frame)
         startView = findViewById(R.id.start)
+
+        settingsView = findViewById(R.id.settings)
 
         setClickListeners()
 
@@ -85,6 +89,11 @@ class MainActivity : AppCompatActivity(), BoutView {
                 presenter.stopTimer()
             }
             true
+        }
+
+        settingsView.setOnClickListener {
+            val modalBottomSheet = SettingsBottomSheet()
+            modalBottomSheet.show(supportFragmentManager, SettingsBottomSheet.TAG)
         }
     }
 

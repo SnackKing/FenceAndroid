@@ -140,8 +140,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
+            android:padding="24dp"
             android:layout_alignParentStart="true"
-            android:text="Actions"
+            android:text="@string/actions"
             android:id="@+id/actions"
             />
 
@@ -150,8 +151,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
+            android:padding="24dp"
             android:layout_centerHorizontal="true"
-            android:text="Cards"
+            android:text="@string/cards"
             android:id="@+id/cards"
             />
 
@@ -159,8 +161,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
+            android:padding="24dp"
             android:layout_alignParentEnd="true"
-            android:text="Settings"
+            android:text="@string/settings"
             android:id="@+id/settings"
             />
 
