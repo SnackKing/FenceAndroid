@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:paddingTop="24dp"
     android:paddingHorizontal="44dp"
+    android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
@@ -15,7 +16,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="Bout Mode"
-        android:textSize="20sp"
+        android:textSize="@dimen/bottomsheet_item_title_size"
+        style="@style/TextAppearance.Material3.TitleSmall"
         android:gravity="center_vertical"
         android:layout_marginEnd="24dp"
         android:text="@string/bout_mode"
@@ -29,11 +31,195 @@
             android:hint="@string/select_one">
 
         <AutoCompleteTextView
-            android:layout_width="match_parent"
+            android:layout_gravity="end"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="none" />
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Weapon"
+            style="@style/TextAppearance.Material3.TitleSmall"
+            android:textSize="@dimen/bottomsheet_item_title_size"
+            android:gravity="center_vertical"
+            android:layout_marginEnd="24dp"
+            android:text="Weapon"
+            />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/weapon_menu"
+            android:layout_gravity="end"
+            android:layout_alignParentEnd="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/select_one">
+
+            <AutoCompleteTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/practice_length_title"
+            tools:text="Practice Length"
+            style="@style/TextAppearance.Material3.TitleSmall"
+            android:textSize="@dimen/bottomsheet_item_title_size"
+            android:gravity="center_vertical"
+            android:layout_marginEnd="24dp"
+            android:text="@string/practice_length"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/number_of_touches_in_a_practice_bout"
+            android:textSize="@dimen/bottomsheet_item_subtitle_size"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/practice_length_title"
+            android:layout_marginEnd="100dp"
+            android:text="@string/number_of_touches_in_a_practice_bout"
+            />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/practice_length_menu"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="end"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/select_one">
+
+            <AutoCompleteTextView
+                android:layout_gravity="end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Tap to Toggle Timer"
+            android:textSize="@dimen/bottomsheet_item_title_size"
+            android:layout_alignParentStart="true"
+            android:layout_marginEnd="24dp"
+            style="@style/TextAppearance.Material3.TitleSmall"
+            android:id="@+id/timer_tap_mode_title"
+            android:text="Timer Tap Mode"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/when_enabled_tapping_start_will_start_stop_the_timer"
+            android:textSize="@dimen/bottomsheet_item_subtitle_size"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/timer_tap_mode_title"
+            android:layout_toLeftOf="@id/timer_tap_mode_switch"
+            android:layout_marginEnd="24dp"
+            android:text="@string/when_enabled_tapping_start_will_start_stop_the_timer"
+            />
+      <com.google.android.material.switchmaterial.SwitchMaterial
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:id="@+id/timer_tap_mode_switch"
+          android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/timer_buzz_mode_title"
+            tools:text="Timer Buzz"
+            android:textSize="@dimen/bottomsheet_item_title_size"
+            style="@style/TextAppearance.Material3.TitleSmall"
+            android:layout_alignParentStart="true"
+            android:layout_marginEnd="24dp"
+            android:text="Timer Buzz"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="When enabled, will buzz when time runs out"
+            android:textSize="@dimen/bottomsheet_item_subtitle_size"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/timer_buzz_mode_title"
+            android:layout_toStartOf="@id/timer_buzz_switch"
+            android:layout_marginEnd="24dp"
+            android:text="@string/when_enabled_will_buzz_when_time_runs_out"
+            />
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/timer_buzz_switch"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="48dp"
+        android:layout_marginTop="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/timer_sound_title"
+            tools:text="Timer Sound"
+            android:textSize="@dimen/bottomsheet_item_title_size"
+            style="@style/TextAppearance.Material3.TitleSmall"
+            android:layout_alignParentStart="true"
+            android:layout_marginEnd="24dp"
+            android:text="@string/timer_sound"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/when_enabled_will_play_a_sound_when_time_runs_out_make_sure_your_volume_is_turned_up"
+            android:textSize="@dimen/bottomsheet_item_subtitle_size"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/timer_sound_title"
+            android:layout_toStartOf="@id/timer_sound_switch"
+            android:layout_marginEnd="24dp"
+            android:text="@string/when_enabled_will_play_a_sound_when_time_runs_out_make_sure_your_volume_is_turned_up"
+            />
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/timer_sound_switch"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
 
 </LinearLayout>

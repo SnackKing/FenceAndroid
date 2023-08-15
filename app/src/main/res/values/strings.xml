@@ -9,4 +9,10 @@
     <string name="cards">Cards</string>
     <string name="actions">Actions</string>
     <string name="select_one">Select One</string>
+    <string name="practice_length">Practice Length</string>
+    <string name="when_enabled_tapping_start_will_start_stop_the_timer">When enabled, tapping Start will start/stop the timer</string>
+    <string name="when_enabled_will_buzz_when_time_runs_out">When enabled, will buzz when time runs out</string>
+    <string name="timer_sound">Timer Sound</string>
+    <string name="when_enabled_will_play_a_sound_when_time_runs_out_make_sure_your_volume_is_turned_up">When enabled, will play a sound when time runs out. Make sure your volume is turned up!</string>
+    <string name="number_of_touches_in_a_practice_bout">Number of touches in a practice bout</string>
 </resources>
