@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+option java_package = "com.zachallegretti.fenceandroid";
+option java_multiple_files = true;
+
+message BoutSettings {
+  int32 bout_settings_key = 1;
+  int32 weapon_key = 2;
+  int32 practice_score_key = 3;
+
+  bool timer_tap_mode_enabled = 4;
+  bool timer_buzz_enabled = 5;
+  bool timer_sound_enabled = 6;
+}

@@ -7,12 +7,12 @@ data class Bout(
     var boutType: BoutType = BoutType.PRACTICE,
     var finished: Boolean = false
 ) {
-    enum class BoutType {
-        PRACTICE,
-        POOL,
-        TEAM,
-        DE,
-        VET_DE,
-        YOUTH_DE
+    enum class BoutType(val value: Int) {
+        PRACTICE(1),
+        POOL(2),
+        TEAM(3),
+        DE(4),
+        VET_DE(5),
+        YOUTH_DE(6)
     }
 }
