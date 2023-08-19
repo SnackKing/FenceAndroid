@@ -8,9 +8,57 @@ import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class BoutPreferencesDataStore {
+class BoutPreferencesDataStore(val context: Context) {
 
-    val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = STORE_NAME)
+    val boutSettingsFlow: Flow<BoutSettings> = context.boutSettingsDataStore.data
+
+    suspend fun updateBoutMode(boutMode: Bout.BoutType ) {
+        context.boutSettingsDataStore.updateData { currentSettings ->
+            currentSettings.toBuilder()
+                .setBoutSettingsKey(boutMode.value)
+                .build()
+        }
+    }
+
+    suspend fun updateWeapon(weapon: Bout.WeaponType) {
+        context.boutSettingsDataStore.updateData { currentSettings ->
+            currentSettings.toBuilder()
+                .setWeaponKey(weapon.value)
+                .build()
+        }
+    }
+
+    suspend fun updatePracticeScore(scoreCap: Int) {
+        context.boutSettingsDataStore.updateData { currentSettings ->
+            currentSettings.toBuilder()
+                .setPracticeScore(scoreCap)
+                .build()
+        }
+    }
+
+    suspend fun setTimerTapModeEnabled(enabled: Boolean) {
+        context.boutSettingsDataStore.updateData { currentSettings ->
+            currentSettings.toBuilder()
+                .setTimerTapModeEnabled(enabled)
+                .build()
+        }
+    }
+
+    suspend fun setTimerBuzzEnabled(enabled: Boolean) {
+        context.boutSettingsDataStore.updateData { currentSettings ->
+            currentSettings.toBuilder()
+                .setTimerBuzzEnabled(enabled)
+                .build()
+        }
+    }
+
+    suspend fun setTimerSoundEnabled(enabled: Boolean) {
+        context.boutSettingsDataStore.updateData { currentSettings ->
+            currentSettings.toBuilder()
+                .setTimerSoundEnabled(enabled)
+                .build()
+        }
+    }
 
 
 
