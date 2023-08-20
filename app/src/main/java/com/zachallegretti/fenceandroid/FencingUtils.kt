@@ -11,5 +11,5 @@ object FencingUtils {
         }
     }
 
-    const val BOUT_PERIOD_LENGTH = 3000L
+    const val BOUT_PERIOD_LENGTH = 180000L
 }

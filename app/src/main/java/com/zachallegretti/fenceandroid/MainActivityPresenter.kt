@@ -38,6 +38,8 @@ class MainActivityPresenter constructor(val view: BoutView, val context: Context
         (view as Activity).runOnUiThread {
             view.updateBoutType(bout.boutType)
             view.setDoubleTouchVisibility(bout.weaponType == Bout.WeaponType.EPEE)
+            //TODO Don't always reset timer
+            view.updateTimerText(bout.millisRemaining)
         }
 
     }
