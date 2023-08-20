@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import androidx.core.view.get
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.materialswitch.MaterialSwitch
 import com.google.android.material.switchmaterial.SwitchMaterial
@@ -57,11 +58,43 @@ class SettingsBottomSheet : BottomSheetDialogFragment() {
 
         (boutType.editText as AutoCompleteTextView).onItemClickListener =
             OnItemClickListener { adapterView, view, position, id ->
-                val selectedValue = adapter.getItem(position)
                 CoroutineScope(Dispatchers.IO).launch {
                     boutPreferencesDataStore.updateBoutMode(Bout.BoutType.fromInt(position))
                 }
             }
+
+        (weaponType.editText as AutoCompleteTextView).onItemClickListener =
+            OnItemClickListener { adapterView, view, position, id ->
+                CoroutineScope(Dispatchers.IO).launch {
+                    boutPreferencesDataStore.updateWeapon(Bout.WeaponType.fromInt(position))
+                }
+            }
+
+        (practiceLength.editText as AutoCompleteTextView).onItemClickListener =
+            OnItemClickListener { adapterView, view, position, id ->
+                CoroutineScope(Dispatchers.IO).launch {
+                    boutPreferencesDataStore.updatePracticeScore(PRACTICE_LIST[position].toInt())
+                }
+            }
+
+        timerTapToggle.setOnCheckedChangeListener { compoundButton, checked ->
+            CoroutineScope(Dispatchers.IO).launch {
+                boutPreferencesDataStore.setTimerTapModeEnabled(checked)
+            }
+        }
+
+        timerBuzzToggle.setOnCheckedChangeListener { compoundButton, checked ->
+            CoroutineScope(Dispatchers.IO).launch {
+                boutPreferencesDataStore.setTimerBuzzEnabled(checked)
+            }
+        }
+
+        timerSoundToggle.setOnCheckedChangeListener { compoundButton, checked ->
+            CoroutineScope(Dispatchers.IO).launch {
+                boutPreferencesDataStore.setTimerSoundEnabled(checked)
+            }
+        }
+
         return view
     }
 
@@ -70,8 +103,28 @@ class SettingsBottomSheet : BottomSheetDialogFragment() {
 
         CoroutineScope(Dispatchers.IO).launch {
             boutPreferencesDataStore.boutSettingsFlow.collect {
-                val key = it.boutSettingsKey
-                (boutType.editText as? AutoCompleteTextView)?.setText(Bout.BoutType.fromInt(it.boutSettingsKey).name, false)
+                activity?.runOnUiThread {
+
+                    (boutType.editText as? AutoCompleteTextView)?.setText(
+                        Bout.BoutType.fromInt(it.boutSettingsKey).name,
+                        false
+                    )
+                    (weaponType.editText as? AutoCompleteTextView)?.setText(
+                        Bout.WeaponType.fromInt(
+                            it.weaponKey
+                        ).name, false
+                    )
+                    if (it.practiceScore != 0) {
+                        (practiceLength.editText as? AutoCompleteTextView)?.setText(
+                            it.practiceScore.toString(),
+                            false
+                        )
+                    }
+
+                    timerTapToggle.isChecked = it.timerTapModeEnabled
+                    timerBuzzToggle.isChecked = it.timerBuzzEnabled
+                    timerSoundToggle.isChecked = it.timerSoundEnabled
+                }
             }
         }
     }
@@ -94,8 +147,8 @@ class SettingsBottomSheet : BottomSheetDialogFragment() {
 
     companion object {
         const val TAG = "SettingsBottomSheet"
-        val BOUT_TYPE_LIST = listOf("Practice", "Pool", "Team", "DE", "DE (VET)", "DE(Y10)")
-        val WEAPON_LIST = listOf("Epee", "Foil", "Saber")
+        val BOUT_TYPE_LIST = Bout.BoutType.values().map { it.name }
+        val WEAPON_LIST = Bout.WeaponType.values().map { it.name }
         val PRACTICE_LIST = listOf("5", "10", "15", "99")
     }
 
