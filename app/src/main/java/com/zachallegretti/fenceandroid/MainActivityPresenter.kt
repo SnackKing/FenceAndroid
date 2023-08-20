@@ -1,11 +1,17 @@
 package com.zachallegretti.fenceandroid
 
+import android.app.Activity
+import android.content.Context
 import android.os.CountDownTimer
-import android.view.View
 import com.zachallegretti.fenceandroid.FencingUtils.getMaxScoreForBoutType
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class MainActivityPresenter constructor(val view: BoutView) {
+class MainActivityPresenter constructor(val view: BoutView, val context: Context) {
     private lateinit var bout: Bout
+    private lateinit var boutPreferencesDataStore: BoutPreferencesDataStore
+    private lateinit var boutSettings: BoutSettings
     private var countDownTimer: CountDownTimer? = null
 
     fun startTimer() {
@@ -28,9 +34,12 @@ class MainActivityPresenter constructor(val view: BoutView) {
     }
 
 
-    fun updateBoutType(boutType: Bout.BoutType) {
-        bout.boutType = boutType
-        view.updateBoutType(boutType)
+    private fun boutUpdated() {
+        (view as Activity).runOnUiThread {
+            view.updateBoutType(bout.boutType)
+            view.setDoubleTouchVisibility(bout.weaponType == Bout.WeaponType.EPEE)
+        }
+
     }
 
     fun increaseLeftScore() {
@@ -68,8 +77,22 @@ class MainActivityPresenter constructor(val view: BoutView) {
         }
     }
 
+
     init {
-        //TODO figure out correct value to pass here
-        this.bout = Bout(millisRemaining =  15000)
+        boutPreferencesDataStore = BoutPreferencesDataStore(context)
+        CoroutineScope(Dispatchers.IO).launch {
+            // Flow will publish new data when settings are updated.
+            boutPreferencesDataStore.boutSettingsFlow.collect {
+                boutSettings = it
+                bout = Bout(
+                    millisRemaining = FencingUtils.BOUT_PERIOD_LENGTH,
+                    boutType = Bout.BoutType.fromInt(it.boutSettingsKey),
+                    weaponType = Bout.WeaponType.fromInt(it.weaponKey)
+                )
+                boutUpdated()
+
+            }
+        }
+        this.bout = Bout(millisRemaining =  FencingUtils.BOUT_PERIOD_LENGTH)
     }
 }

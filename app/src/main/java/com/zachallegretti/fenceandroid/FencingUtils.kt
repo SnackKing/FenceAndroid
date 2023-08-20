@@ -10,4 +10,6 @@ object FencingUtils {
             Bout.BoutType.TEAM -> 45
         }
     }
+
+    const val BOUT_PERIOD_LENGTH = 3000L
 }

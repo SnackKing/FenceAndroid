@@ -3,6 +3,7 @@ package com.zachallegretti.fenceandroid
 import android.os.Bundle
 import android.view.MotionEvent.ACTION_DOWN
 import android.view.MotionEvent.ACTION_UP
+import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.TextView
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity(), BoutView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        presenter = MainActivityPresenter(this)
+        presenter = MainActivityPresenter(this, applicationContext)
 
         leftScoreIncreaseButton = findViewById(R.id.left_increase_button)
         leftScoreDecreaseButton = findViewById(R.id.left_decrease_button)
@@ -115,6 +116,10 @@ class MainActivity : AppCompatActivity(), BoutView {
         } else {
             startView.text = applicationContext.resources.getString(R.string.stop)
         }
+    }
+
+    override fun setDoubleTouchVisibility(show: Boolean) {
+        doubleTouchView.visibility = if(show) View.VISIBLE else View.GONE
     }
 
     override fun updateTimerText(millisRemaining: Long) {
