@@ -122,6 +122,28 @@ class MainActivity : AppCompatActivity(), BoutView {
         doubleTouchView.visibility = if(show) View.VISIBLE else View.GONE
     }
 
+
+    override fun useTimerTapMode(timerTapEnabled: Boolean) {
+        if (timerTapEnabled) {
+            startFrame.setOnTouchListener { view, motionEvent ->
+                if (motionEvent.action == ACTION_UP) {
+                    presenter.toggleTimer()
+                }
+                true
+            }
+        } else {
+            startFrame.setOnTouchListener { view, motionEvent ->
+                if (motionEvent.action == ACTION_DOWN) {
+                    presenter.startTimer()
+
+                } else if (motionEvent.action == ACTION_UP) {
+                    presenter.stopTimer()
+                }
+                true
+            }
+        }
+    }
+
     override fun updateTimerText(millisRemaining: Long) {
         timer.text = convertMillisToString(millisRemaining)
     }

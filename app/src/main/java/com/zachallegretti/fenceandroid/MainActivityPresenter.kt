@@ -14,6 +14,8 @@ class MainActivityPresenter constructor(val view: BoutView, val context: Context
     private lateinit var boutSettings: BoutSettings
     private var countDownTimer: CountDownTimer? = null
 
+    private var timerRunning = false
+
     fun startTimer() {
         countDownTimer =  object :CountDownTimer(bout.millisRemaining, 1000) {
             override fun onTick(millisUntilFinished: Long) {
@@ -33,6 +35,27 @@ class MainActivityPresenter constructor(val view: BoutView, val context: Context
         countDownTimer?.cancel()
     }
 
+    fun toggleTimer() {
+        if (timerRunning) {
+            countDownTimer?.cancel()
+            timerRunning = false
+            view.updateStartStopText(true)
+        } else {
+            countDownTimer = object : CountDownTimer(bout.millisRemaining, 1000) {
+                override fun onTick(millisUntilFinished: Long) {
+                    timerRunning = true
+                    view.updateTimerText(millisUntilFinished)
+                    bout.millisRemaining = millisUntilFinished
+                }
+
+                override fun onFinish() {
+                    timerRunning = false
+                }
+            }.start()
+            view.updateStartStopText(false)
+        }
+    }
+
 
     private fun boutUpdated() {
         (view as Activity).runOnUiThread {
@@ -40,6 +63,7 @@ class MainActivityPresenter constructor(val view: BoutView, val context: Context
             view.setDoubleTouchVisibility(bout.weaponType == Bout.WeaponType.EPEE)
             //TODO Don't always reset timer
             view.updateTimerText(bout.millisRemaining)
+            view.useTimerTapMode(boutSettings.timerTapModeEnabled)
         }
 
     }

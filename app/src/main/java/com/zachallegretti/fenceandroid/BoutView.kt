@@ -13,4 +13,6 @@ interface BoutView {
     fun updateStartStopText(start: Boolean)
 
     fun setDoubleTouchVisibility(show: Boolean)
+
+    fun useTimerTapMode(timerTapEnabled: Boolean)
 }
