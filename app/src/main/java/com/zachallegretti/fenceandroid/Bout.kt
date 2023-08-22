@@ -14,7 +14,8 @@ data class Bout(
         TEAM(2),
         DE(3),
         VET_DE(4),
-        YOUTH_DE(5);
+        YOUTH_DE(5),
+        TEST(6);
 
         companion object {
             fun fromInt(value: Int) = BoutType.values().first { it.value == value }

@@ -111,7 +111,7 @@ class MainActivityPresenter constructor(val view: BoutView, val context: Context
             boutPreferencesDataStore.boutSettingsFlow.collect {
                 boutSettings = it
                 bout = Bout(
-                    millisRemaining = FencingUtils.BOUT_PERIOD_LENGTH,
+                    millisRemaining = FencingUtils.getBoutLength(Bout.BoutType.fromInt(boutSettings.boutSettingsKey)),
                     boutType = Bout.BoutType.fromInt(it.boutSettingsKey),
                     weaponType = Bout.WeaponType.fromInt(it.weaponKey)
                 )
