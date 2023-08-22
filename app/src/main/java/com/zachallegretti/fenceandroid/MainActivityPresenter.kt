@@ -2,11 +2,17 @@ package com.zachallegretti.fenceandroid
 
 import android.app.Activity
 import android.content.Context
+import android.os.Build
+import android.os.CombinedVibration
 import android.os.CountDownTimer
+import android.os.VibrationEffect
+import android.os.Vibrator
+import android.os.VibratorManager
 import com.zachallegretti.fenceandroid.FencingUtils.getMaxScoreForBoutType
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+
 
 class MainActivityPresenter constructor(val view: BoutView, val context: Context) {
     private lateinit var bout: Bout
@@ -24,7 +30,7 @@ class MainActivityPresenter constructor(val view: BoutView, val context: Context
             }
 
             override fun onFinish() {
-                // TODO Figure out what to do when bout ends
+                maybeVibrateDevice()
             }
         }.start()
         view.updateStartStopText(false)
@@ -50,9 +56,25 @@ class MainActivityPresenter constructor(val view: BoutView, val context: Context
 
                 override fun onFinish() {
                     timerRunning = false
+                    maybeVibrateDevice()
                 }
             }.start()
             view.updateStartStopText(false)
+        }
+    }
+
+    private fun maybeVibrateDevice() {
+        if (boutSettings.timerBuzzEnabled) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    val vibratorManager =
+                        context.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
+                    val vibrationPattern = longArrayOf(500L, 3000L, 5000L)
+                    val vibrationEffect = VibrationEffect.createWaveform(vibrationPattern, 0)
+                    vibratorManager.vibrate(CombinedVibration.createParallel(vibrationEffect))
+                } else {
+                    val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+                    vibrator.vibrate(5000L)
+                }
         }
     }
 
