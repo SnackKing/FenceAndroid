@@ -38,6 +38,8 @@ class MainActivity : AppCompatActivity(), BoutView {
 
     private lateinit var settingsView: TextView
 
+    private var settingsBottomSheet: SettingsBottomSheet? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -137,8 +139,10 @@ class MainActivity : AppCompatActivity(), BoutView {
         }
 
         settingsView.setOnClickListener {
-            val modalBottomSheet = SettingsBottomSheet()
-            modalBottomSheet.show(supportFragmentManager, SettingsBottomSheet.TAG)
+            if (settingsBottomSheet == null || settingsBottomSheet?.isVisible == false) {
+                settingsBottomSheet = SettingsBottomSheet()
+                settingsBottomSheet?.show(supportFragmentManager, SettingsBottomSheet.TAG)
+            }
         }
     }
 
