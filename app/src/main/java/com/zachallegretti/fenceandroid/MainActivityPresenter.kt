@@ -2,6 +2,8 @@ package com.zachallegretti.fenceandroid
 
 import android.app.Activity
 import android.content.Context
+import android.media.MediaPlayer
+import android.media.RingtoneManager
 import android.os.Build
 import android.os.CombinedVibration
 import android.os.CountDownTimer
@@ -31,6 +33,7 @@ class MainActivityPresenter constructor(val view: BoutView, val context: Context
 
             override fun onFinish() {
                 maybeVibrateDevice()
+                maybePlayAlarm()
             }
         }.start()
         view.updateStartStopText(false)
@@ -57,6 +60,7 @@ class MainActivityPresenter constructor(val view: BoutView, val context: Context
                 override fun onFinish() {
                     timerRunning = false
                     maybeVibrateDevice()
+                    maybePlayAlarm()
                 }
             }.start()
             view.updateStartStopText(false)
@@ -75,6 +79,14 @@ class MainActivityPresenter constructor(val view: BoutView, val context: Context
                     val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
                     vibrator.vibrate(5000L)
                 }
+        }
+    }
+
+    private fun maybePlayAlarm() {
+        if (boutSettings.timerSoundEnabled) {
+            val alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+            val mp = MediaPlayer.create(context, alarmSound)
+            mp.start()
         }
     }
 
