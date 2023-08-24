@@ -1,9 +1,12 @@
 package com.zachallegretti.fenceandroid
 
+import android.animation.Animator
 import android.os.Bundle
 import android.view.MotionEvent.ACTION_DOWN
 import android.view.MotionEvent.ACTION_UP
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.Animation.AnimationListener
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.TextView
@@ -17,6 +20,8 @@ class MainActivity : AppCompatActivity(), BoutView {
     private lateinit var leftScoreIncreaseButton: Button
     private lateinit var leftScoreDecreaseButton: Button
     private lateinit var leftScoreView: TextView
+    private lateinit var leftGradient: View
+    private lateinit var rightGradient: View
 
     private lateinit var rightScoreIncreaseButton: Button
     private lateinit var rightScoreDecreaseButton: Button
@@ -41,10 +46,12 @@ class MainActivity : AppCompatActivity(), BoutView {
         leftScoreIncreaseButton = findViewById(R.id.left_increase_button)
         leftScoreDecreaseButton = findViewById(R.id.left_decrease_button)
         leftScoreView = findViewById(R.id.left_score)
+        leftGradient = findViewById(R.id.left_gradient)
 
         rightScoreIncreaseButton = findViewById(R.id.right_increase_button)
         rightScoreDecreaseButton = findViewById(R.id.right_decrease_button)
         rightScoreView = findViewById(R.id.right_score)
+        rightGradient = findViewById(R.id.right_gradient)
 
         doubleTouchView = findViewById(R.id.double_touch)
 
@@ -60,10 +67,44 @@ class MainActivity : AppCompatActivity(), BoutView {
         setClickListeners()
 
     }
+    val animationListener: Animator.AnimatorListener? = object : Animator.AnimatorListener {
+        override fun onAnimationStart(p0: Animator) {
+        }
+
+        override fun onAnimationEnd(p0: Animator) {
+            leftGradient.animate().alpha(0f).setDuration(GRADIENT_FADE_TIME_MILLIS).start()
+        }
+
+        override fun onAnimationCancel(p0: Animator) {
+        }
+
+        override fun onAnimationRepeat(p0: Animator) {
+        }
+
+
+    }
+
+    val rightAnimationListener: Animator.AnimatorListener? = object : Animator.AnimatorListener {
+        override fun onAnimationStart(p0: Animator) {
+        }
+
+        override fun onAnimationEnd(p0: Animator) {
+            rightGradient.animate().alpha(0f).setDuration(GRADIENT_FADE_TIME_MILLIS).start()
+        }
+
+        override fun onAnimationCancel(p0: Animator) {
+        }
+
+        override fun onAnimationRepeat(p0: Animator) {
+        }
+
+
+    }
 
     private fun setClickListeners() {
         leftScoreIncreaseButton.setOnClickListener {
             presenter.increaseLeftScore()
+            leftGradient.animate().alpha(1f).setListener(animationListener).start()
         }
 
         leftScoreDecreaseButton.setOnClickListener {
@@ -72,6 +113,7 @@ class MainActivity : AppCompatActivity(), BoutView {
 
         rightScoreIncreaseButton.setOnClickListener {
             presenter.increaseRightScore()
+            rightGradient.animate().alpha(1f).setListener(rightAnimationListener).start()
         }
 
         rightScoreDecreaseButton.setOnClickListener {
@@ -80,6 +122,8 @@ class MainActivity : AppCompatActivity(), BoutView {
 
         doubleTouchView.setOnClickListener {
             presenter.doubleTouch()
+            leftGradient.animate().alpha(1f).setListener(animationListener).start()
+            rightGradient.animate().alpha(1f).setListener(rightAnimationListener).start()
         }
 
         startFrame.setOnTouchListener { view, motionEvent ->
@@ -153,4 +197,8 @@ class MainActivity : AppCompatActivity(), BoutView {
             TimeUnit.MILLISECONDS.toMinutes(millis),
             TimeUnit.MILLISECONDS.toSeconds(millis) % TimeUnit.MINUTES.toSeconds(1)
         )
+
+    companion object {
+        const val GRADIENT_FADE_TIME_MILLIS = 750L
+    }
 }

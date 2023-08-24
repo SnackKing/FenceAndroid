@@ -128,6 +128,30 @@
 
     </FrameLayout>
 
+    <View
+        android:id="@+id/left_gradient"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:animateLayoutChanges="true"
+        android:layout_width="0dp"
+        android:translationZ="-1dp"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        app:layout_constraintWidth_percent="0.5"
+        android:background="@drawable/left_score_gradient"/>
+
+    <View
+        android:id="@+id/right_gradient"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:animateLayoutChanges="true"
+        android:translationZ="-1dp"
+        android:background="@drawable/right_score_gradient"
+        android:alpha="0"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="0.5" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

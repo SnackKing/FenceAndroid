@@ -15,4 +15,5 @@ interface BoutView {
     fun setDoubleTouchVisibility(show: Boolean)
 
     fun useTimerTapMode(timerTapEnabled: Boolean)
+
 }
