@@ -2,4 +2,9 @@
 <resources>
     <dimen name="bottomsheet_item_title_size">20sp</dimen>
     <dimen name="bottomsheet_item_subtitle_size">16sp</dimen>
+
+    <dimen name="main_content_vertical_margin">24sp</dimen>
+    <dimen name="main_content_horizontal_margin">16sp</dimen>
+
+
 </resources>
