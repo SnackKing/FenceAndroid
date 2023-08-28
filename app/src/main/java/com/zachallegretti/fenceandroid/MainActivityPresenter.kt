@@ -34,6 +34,7 @@ class MainActivityPresenter constructor(val view: BoutView, val context: Context
             override fun onFinish() {
                 maybeVibrateDevice()
                 maybePlayAlarm()
+                // TODO Add bout end logic
             }
         }.start()
         view.updateStartStopText(false)
@@ -61,6 +62,7 @@ class MainActivityPresenter constructor(val view: BoutView, val context: Context
                     timerRunning = false
                     maybeVibrateDevice()
                     maybePlayAlarm()
+                    // TODO Add bout end logic
                 }
             }.start()
             view.updateStartStopText(false)

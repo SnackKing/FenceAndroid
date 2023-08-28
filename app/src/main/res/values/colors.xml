@@ -6,6 +6,8 @@
     <color name="score_light_red">#FF7276</color>
     <color name="score_green">#008000</color>
     <color name="score_light_green">#90EE90</color>
+    <color name="timer_yellow">#FFFF00</color>
+    <color name="timer_light_yellow">#ffffe0</color>
     <color name="ebfg_green">#35900d</color>
     <color name="light_grey">#D3D3D3</color>
 </resources>

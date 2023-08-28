@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.view.MotionEvent.ACTION_DOWN
 import android.view.MotionEvent.ACTION_UP
 import android.view.View
-import android.view.animation.Animation
-import android.view.animation.Animation.AnimationListener
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.TextView
@@ -23,6 +21,7 @@ class MainActivity : AppCompatActivity(), BoutView {
     private lateinit var leftScoreView: TextView
     private lateinit var leftGradient: View
     private lateinit var rightGradient: View
+    private lateinit var timerGradient: View
 
     private lateinit var rightScoreIncreaseButton: Button
     private lateinit var rightScoreDecreaseButton: Button
@@ -55,6 +54,8 @@ class MainActivity : AppCompatActivity(), BoutView {
         rightScoreDecreaseButton = findViewById(R.id.right_decrease_button)
         rightScoreView = findViewById(R.id.right_score)
         rightGradient = findViewById(R.id.right_gradient)
+
+        timerGradient = findViewById(R.id.timer_gradient)
 
         doubleTouchView = findViewById(R.id.double_touch)
 
@@ -162,8 +163,13 @@ class MainActivity : AppCompatActivity(), BoutView {
     override fun updateStartStopText(started: Boolean) {
         if (started) {
             startView.text = applicationContext.resources.getString(R.string.start)
+            timerGradient.animate().alpha(0f).start()
+
         } else {
             startView.text = applicationContext.resources.getString(R.string.stop)
+            timerGradient.animate().alpha(1f).start()
+            timerGradient.alpha = 0f
+
         }
     }
 

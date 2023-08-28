@@ -1,0 +1,11 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle" >
+    <gradient
+        android:type="radial"
+        android:gradientRadius="200%p"
+        android:startColor="@color/timer_yellow"
+        android:centerColor="@color/timer_light_yellow"
+        android:endColor="#ffffe0"
+        android:angle="0"/>
+    <corners
+        android:radius="0dp"/>
+</shape>
