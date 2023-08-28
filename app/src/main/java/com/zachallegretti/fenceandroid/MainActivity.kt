@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity(), BoutView {
@@ -191,6 +192,18 @@ class MainActivity : AppCompatActivity(), BoutView {
             }
         }
     }
+
+    override fun showBoutEndDialog(leftScore: Int, rightScore: Int) {
+        val winner = if (leftScore > rightScore) "left" else "right"
+        MaterialAlertDialogBuilder(this, R.style.Theme_MyApp_Dialog_Alert)
+            .setMessage(getString(R.string.bout_end_dialog_text, winner, leftScore, rightScore))
+            .setNegativeButton(resources.getString(R.string.cancel)) { dialog, which ->
+                dialog.dismiss()
+            }
+            .setPositiveButton(resources.getString(R.string.new_bout)) { dialog, which ->
+                presenter.newBout()
+            }
+            .show()    }
 
     override fun updateTimerText(millisRemaining: Long) {
         timer.text = convertMillisToString(millisRemaining)

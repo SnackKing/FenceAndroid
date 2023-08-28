@@ -16,4 +16,6 @@ interface BoutView {
 
     fun useTimerTapMode(timerTapEnabled: Boolean)
 
+    fun showBoutEndDialog(leftScore: Int, rightScore: Int)
+
 }

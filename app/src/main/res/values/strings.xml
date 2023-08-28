@@ -15,4 +15,7 @@
     <string name="timer_sound">Timer Sound</string>
     <string name="when_enabled_will_play_a_sound_when_time_runs_out_make_sure_your_volume_is_turned_up">When enabled, will play a sound when time runs out. Make sure your volume is turned up!</string>
     <string name="number_of_touches_in_a_practice_bout">Number of touches in a practice bout</string>
+    <string name="bout_end_dialog_text">Victory %1$s: score is %2$d to %3$d</string>
+    <string name="cancel">Cancel</string>
+    <string name="new_bout">New bout</string>
 </resources>

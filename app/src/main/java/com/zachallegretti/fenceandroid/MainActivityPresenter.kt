@@ -98,15 +98,18 @@ class MainActivityPresenter constructor(val view: BoutView, val context: Context
             //TODO Don't always reset timer
             view.updateTimerText(bout.millisRemaining)
             view.useTimerTapMode(boutSettings.timerTapModeEnabled)
+            resetScores()
         }
 
     }
 
     fun increaseLeftScore() {
-        bout.leftScore++
-        view.updateLeftScore(bout.leftScore)
+        if (bout.leftScore < getMaxScoreForBoutType(bout.boutType)) {
+            bout.leftScore++
+            view.updateLeftScore(bout.leftScore)
+        }
         if (bout.leftScore == getMaxScoreForBoutType(bout.boutType)) {
-            // TODO Figure out what to do when bout ends
+            view.showBoutEndDialog(bout.leftScore, bout.rightScore)
         }
     }
 
@@ -118,10 +121,12 @@ class MainActivityPresenter constructor(val view: BoutView, val context: Context
     }
 
     fun increaseRightScore() {
-        bout.rightScore++
-        view.updateRightScore(bout.rightScore)
+        if (bout.rightScore < getMaxScoreForBoutType(bout.boutType)) {
+            bout.rightScore++
+            view.updateRightScore(bout.rightScore)
+        }
         if (bout.rightScore == getMaxScoreForBoutType(bout.boutType)) {
-            // TODO Figure out what to do when bout ends
+            view.showBoutEndDialog(bout.leftScore, bout.rightScore)
         }
     }
 
@@ -130,11 +135,27 @@ class MainActivityPresenter constructor(val view: BoutView, val context: Context
         increaseRightScore()
     }
 
+    fun resetScores() {
+        bout.leftScore = 0
+        bout.rightScore = 0
+        view.updateLeftScore(0)
+        view.updateRightScore(0)
+    }
+
     fun decreaseRightScore() {
         if (bout.rightScore > 0) {
             bout.rightScore--
             view.updateRightScore(bout.rightScore)
         }
+    }
+
+    fun newBout() {
+        bout = Bout(
+            millisRemaining = FencingUtils.getBoutLength(Bout.BoutType.fromInt(boutSettings.boutSettingsKey)),
+            boutType = Bout.BoutType.fromInt(boutSettings.boutSettingsKey),
+            weaponType = Bout.WeaponType.fromInt(boutSettings.weaponKey)
+        )
+        boutUpdated()
     }
 
 

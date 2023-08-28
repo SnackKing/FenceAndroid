@@ -24,6 +24,14 @@
     <style name="ThemeOverlay.App.Switch" parent="">
         <item name="colorOnSurface">@color/white</item>
         <item name="colorSecondary">@color/ebfg_green</item>
-        <item name="colorSurface">@color/light_grey</item>
+        <item name="colorSurface">@color/black</item>
+    </style>
+
+    <style name="Theme.MyApp.Dialog.Alert" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="materialAlertDialogTitleTextStyle">@style/MaterialAlertDialogText</item>
+    </style>
+
+    <style name="MaterialAlertDialogText" parent="@style/MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:textColor">@color/black</item>
     </style>
 </resources>
