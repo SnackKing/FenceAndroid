@@ -129,6 +129,10 @@ class SettingsBottomSheet : BottomSheetDialogFragment() {
         }
     }
 
+    override fun getTheme(): Int {
+        return R.style.BottomSheetDialog
+    }
+
 
     private fun getSelectedBoutType(): String {
         //TODO: Add real implementation

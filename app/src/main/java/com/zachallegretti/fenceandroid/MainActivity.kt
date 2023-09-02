@@ -37,8 +37,10 @@ class MainActivity : AppCompatActivity(), BoutView {
     private lateinit var startView: TextView
 
     private lateinit var settingsView: TextView
+    private lateinit var cardsView: TextView
 
     private var settingsBottomSheet: SettingsBottomSheet? = null
+    private var penaltyBottomSheet: PenaltyBottomSheet? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +69,7 @@ class MainActivity : AppCompatActivity(), BoutView {
         startView = findViewById(R.id.start)
 
         settingsView = findViewById(R.id.settings)
+        cardsView = findViewById(R.id.cards)
 
         setClickListeners()
 
@@ -144,6 +147,12 @@ class MainActivity : AppCompatActivity(), BoutView {
             if (settingsBottomSheet == null || settingsBottomSheet?.isVisible == false) {
                 settingsBottomSheet = SettingsBottomSheet()
                 settingsBottomSheet?.show(supportFragmentManager, SettingsBottomSheet.TAG)
+            }
+        }
+        cardsView.setOnClickListener {
+            if (penaltyBottomSheet == null || penaltyBottomSheet?.isVisible == false) {
+                penaltyBottomSheet = PenaltyBottomSheet()
+                penaltyBottomSheet?.show(supportFragmentManager, PenaltyBottomSheet.TAG)
             }
         }
     }
