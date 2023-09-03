@@ -151,7 +151,7 @@ class MainActivity : AppCompatActivity(), BoutView {
         }
         cardsView.setOnClickListener {
             if (penaltyBottomSheet == null || penaltyBottomSheet?.isVisible == false) {
-                penaltyBottomSheet = PenaltyBottomSheet()
+                penaltyBottomSheet = PenaltyBottomSheet(presenter)
                 penaltyBottomSheet?.show(supportFragmentManager, PenaltyBottomSheet.TAG)
             }
         }
