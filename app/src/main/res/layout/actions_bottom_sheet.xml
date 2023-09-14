@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginHorizontal="@dimen/main_content_horizontal_margin"
+    android:layout_marginVertical="@dimen/main_content_vertical_margin"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:paddingVertical="@dimen/list_vertical_spacing"
+        android:textSize="@dimen/bottomsheet_item_title_size"
+        style="@style/TextAppearance.Material3.TitleSmall"
+        android:id="@+id/change_time_remaining"
+        android:text="@string/change_time_remaining"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/list_vertical_spacing"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:textSize="@dimen/bottomsheet_item_title_size"
+        style="@style/TextAppearance.Material3.TitleSmall"
+        android:id="@+id/medical_break"
+        android:text="@string/medical_break"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/list_vertical_spacing"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:textSize="@dimen/bottomsheet_item_title_size"
+        style="@style/TextAppearance.Material3.TitleSmall"
+        android:id="@+id/next_bout"
+        android:text="@string/next_bout"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/list_vertical_spacing"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:textSize="@dimen/bottomsheet_item_title_size"
+        style="@style/TextAppearance.Material3.TitleSmall"
+        android:id="@+id/penalty_chart"
+        android:text="@string/penalty_chart"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/done"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/list_vertical_spacing"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textSize="18sp"
+        android:padding="8dp"
+        android:text="@string/done"/>
+
+
+</LinearLayout>

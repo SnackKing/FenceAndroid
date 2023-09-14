@@ -22,4 +22,8 @@
     <string name="red">Red</string>
     <string name="black">Black</string>
     <string name="done">Done</string>
+    <string name="change_time_remaining">Change Time Remaining</string>
+    <string name="medical_break">Medical Break</string>
+    <string name="next_bout">Next Bout</string>
+    <string name="penalty_chart">Penalty Chart</string>
 </resources>
